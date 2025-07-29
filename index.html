@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>辩论练习</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- 起始页面（话题选择页） -->
+    <div id="home-page" class="page active">
+        <div class="page-header">
+            <h1 class="app-title">辩论练习</h1>
+        </div>
+        
+        <div class="topic-cards-container">
+            <div id="three-container"></div>
+            <!-- 话题卡片将通过JavaScript动态生成 -->
+        </div>
+        
+        <div class="page-indicator">
+            <div class="indicator-dots">
+                <!-- 指示器点将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 导入页面（视频介绍页） -->
+    <div id="video-page" class="page">
+        <div class="page-header">
+            <button class="back-btn" onclick="goToPage('home')">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2 class="topic-title" id="video-topic-title">话题标题</h2>
+        </div>
+        
+        <div class="video-container">
+            <div class="video-player">
+                <div class="video-cover">
+                    <img id="video-cover-img" src="" alt="视频封面">
+                    <div class="play-button" onclick="playVideo()">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="video-controls" id="video-controls" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress" id="video-progress"></div>
+                    </div>
+                    <div class="control-buttons">
+                        <button onclick="toggleVideo()">
+                            <i class="fas fa-pause" id="play-pause-icon"></i>
+                        </button>
+                        <button onclick="toggleFullscreen()">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="skip-video-btn" onclick="skipVideo()">跳过视频</button>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="primary-btn" id="choose-position-btn" onclick="goToPage('position')" style="display: none;">
+                选择立场
+            </button>
+        </div>
+    </div>
+
+    <!-- 立场选择页 -->
+    <div id="position-page" class="page">
+        <div class="page-header">
+            <button class="back-btn" onclick="goToPage('video')">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2 class="topic-title" id="position-topic-title">话题标题</h2>
+        </div>
+        
+        <div class="position-selection">
+            <div class="position-card positive" onclick="selectPosition('positive')">
+                <div class="position-header">
+                    <h3>正方</h3>
+                    <i class="fas fa-thumbs-up"></i>
+                </div>
+                <div class="position-content">
+                    <p id="positive-viewpoint">正方观点内容</p>
+                </div>
+                <button class="select-btn">选择正方</button>
+            </div>
+            
+            <div class="position-card negative" onclick="selectPosition('negative')">
+                <div class="position-header">
+                    <h3>反方</h3>
+                    <i class="fas fa-thumbs-down"></i>
+                </div>
+                <div class="position-content">
+                    <p id="negative-viewpoint">反方观点内容</p>
+                </div>
+                <button class="select-btn">选择反方</button>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="primary-btn" id="confirm-position-btn" onclick="goToPage('practice')" disabled>
+                确认选择
+            </button>
+        </div>
+    </div>
+
+    <!-- 预习页（准备练习页） -->
+    <div id="practice-page" class="page">
+        <div class="page-header">
+            <button class="back-btn" onclick="goToPage('position')">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="topic-info">
+                <span id="practice-topic-title">话题标题</span>
+                <span class="position-badge" id="selected-position-badge">正方</span>
+            </div>
+        </div>
+        
+        <div class="arguments-section">
+            <div class="argument-card" data-index="0">
+                <div class="argument-header" onclick="toggleArgument(0)">
+                    <h4 class="argument-title">论点1</h4>
+                    <div class="expand-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="read-status"></div>
+                </div>
+                <div class="argument-content">
+                    <p class="argument-preview">论点概述...</p>
+                    <div class="argument-details" style="display: none;">
+                        <p>详细论据和支撑材料...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="argument-card" data-index="1">
+                <div class="argument-header" onclick="toggleArgument(1)">
+                    <h4 class="argument-title">论点2</h4>
+                    <div class="expand-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="read-status"></div>
+                </div>
+                <div class="argument-content">
+                    <p class="argument-preview">论点概述...</p>
+                    <div class="argument-details" style="display: none;">
+                        <p>详细论据和支撑材料...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="argument-card" data-index="2">
+                <div class="argument-header" onclick="toggleArgument(2)">
+                    <h4 class="argument-title">论点3</h4>
+                    <div class="expand-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="read-status"></div>
+                </div>
+                <div class="argument-content">
+                    <p class="argument-preview">论点概述...</p>
+                    <div class="argument-details" style="display: none;">
+                        <p>详细论据和支撑材料...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="voice-practice-section">
+            <p class="practice-hint">请大声练习你的观点</p>
+            
+            <div class="voice-interface">
+                <div class="audio-waves" id="audio-waves" style="display: none;">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+                
+                <div class="voice-controls">
+                    <button class="voice-btn" id="call-btn" onclick="toggleCall()">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <div class="call-timer" id="call-timer" style="display: none;">00:00</div>
+                </div>
+            </div>
+            
+            <button class="primary-btn" id="start-debate-btn" onclick="startDebate()" disabled>
+                开始正式辩论
+            </button>
+        </div>
+    </div>
+
+    <!-- 辩论页面 -->
+    <div id="debate-page" class="page">
+        <!-- 顶部计时区 -->
+        <div class="debate-timer-section">
+            <div class="countdown-timer">
+                <span id="debate-countdown">30</span>s
+            </div>
+            <button class="skip-round-btn" onclick="skipRound()">
+                跳过
+            </button>
+        </div>
+
+        <!-- 对方信息区 -->
+        <div class="participant-section opponent">
+            <div class="participant-avatar">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="对方头像" class="avatar-img">
+                <div class="speaking-indicator" id="opponent-speaking" style="display: none;"></div>
+            </div>
+            <div class="participant-info">
+                <div class="position-badge opponent-badge" id="opponent-position">正方</div>
+                <div class="participant-status" id="opponent-status">等待中...</div>
+            </div>
+        </div>
+
+        <!-- 辩论进度条 -->
+        <div class="debate-progress-section">
+            <div class="round-indicator">第 <span id="current-round">1</span> 轮</div>
+            <div class="progress-circles">
+                <div class="progress-circle" data-round="1">
+                    <i class="fas fa-circle" id="round-1-icon"></i>
+                </div>
+                <div class="progress-circle" data-round="2">
+                    <i class="fas fa-circle" id="round-2-icon"></i>
+                </div>
+                <div class="progress-circle" data-round="3">
+                    <i class="fas fa-circle" id="round-3-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 我方信息区 -->
+        <div class="participant-section player">
+            <div class="participant-avatar">
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=80&h=80&fit=crop&crop=face" alt="我方头像" class="avatar-img">
+                <div class="speaking-indicator" id="player-speaking" style="display: none;"></div>
+            </div>
+            <div class="participant-info">
+                <div class="position-badge player-badge" id="player-position">反方</div>
+                <div class="participant-status" id="player-status">准备中...</div>
+            </div>
+        </div>
+
+        <!-- 语音控制区 -->
+        <div class="debate-voice-section">
+            <div class="voice-status" id="voice-status">
+                <p class="status-text" id="status-text">准备开始第一轮辩论</p>
+            </div>
+            
+            <div class="voice-interface">
+                <div class="audio-waves debate-waves" id="debate-audio-waves" style="display: none;">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+                
+                <button class="voice-btn debate-voice-btn" id="debate-voice-btn" onclick="toggleDebateVoice()">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 漂浮礼物容器 -->
+        <div class="floating-gifts-container" id="floating-gifts"></div>
+
+        <!-- 悬浮助手头像 -->
+        <div class="floating-assistant" onclick="showAssistantTip()">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=60&h=60&fit=crop&crop=face" alt="助手">
+            <div class="assistant-indicator"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
