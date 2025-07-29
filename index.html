@@ -6,7 +6,7 @@
     <title>辩论练习</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 </head>
 <body>
     <!-- 起始页面（话题选择页） -->
@@ -121,77 +121,23 @@
             </div>
         </div>
         
-        <div class="arguments-section">
-            <div class="argument-card" data-index="0">
-                <div class="argument-header" onclick="toggleArgument(0)">
-                    <h4 class="argument-title">论点1</h4>
-                    <div class="expand-icon">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="read-status"></div>
+        <div class="argument-cards-section">
+            <div class="argument-cards-container">
+                <div id="argument-cards-wrapper">
+                    <!-- 论点卡片将通过JavaScript动态生成 -->
                 </div>
-                <div class="argument-content">
-                    <p class="argument-preview">论点概述...</p>
-                    <div class="argument-details" style="display: none;">
-                        <p>详细论据和支撑材料...</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="argument-card" data-index="1">
-                <div class="argument-header" onclick="toggleArgument(1)">
-                    <h4 class="argument-title">论点2</h4>
-                    <div class="expand-icon">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="read-status"></div>
-                </div>
-                <div class="argument-content">
-                    <p class="argument-preview">论点概述...</p>
-                    <div class="argument-details" style="display: none;">
-                        <p>详细论据和支撑材料...</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="argument-card" data-index="2">
-                <div class="argument-header" onclick="toggleArgument(2)">
-                    <h4 class="argument-title">论点3</h4>
-                    <div class="expand-icon">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="read-status"></div>
-                </div>
-                <div class="argument-content">
-                    <p class="argument-preview">论点概述...</p>
-                    <div class="argument-details" style="display: none;">
-                        <p>详细论据和支撑材料...</p>
+                
+                <!-- 卡片指示器 -->
+                <div class="argument-indicator">
+                    <div class="argument-dots" id="argument-dots">
+                        <!-- 指示器点将通过JavaScript动态生成 -->
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="voice-practice-section">
-            <p class="practice-hint">请大声练习你的观点</p>
-            
-            <div class="voice-interface">
-                <div class="audio-waves" id="audio-waves" style="display: none;">
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                </div>
-                
-                <div class="voice-controls">
-                    <button class="voice-btn" id="call-btn" onclick="toggleCall()">
-                        <i class="fas fa-phone"></i>
-                    </button>
-                    <div class="call-timer" id="call-timer" style="display: none;">00:00</div>
-                </div>
-            </div>
-            
-            <button class="primary-btn" id="start-debate-btn" onclick="startDebate()" disabled>
+        <div class="debate-action-section">
+            <button class="primary-btn" id="start-debate-btn" onclick="startDebate()">
                 开始正式辩论
             </button>
         </div>

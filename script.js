@@ -15,8 +15,8 @@ const topicsData = [
         id: 1,
         title: "小学生应该带手机上学吗？",
         description: "探讨小学生是否需要在学校使用手机，以及手机对学习的影响。",
-        image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1607706189992-eae578626c86?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "支持带手机",
@@ -66,8 +66,8 @@ const topicsData = [
         id: 2,
         title: "周末应该多写作业还是多玩耍？",
         description: "讨论周末时间的安排，是应该专注学习还是放松娱乐。",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该多写作业",
@@ -117,8 +117,8 @@ const topicsData = [
         id: 3,
         title: "学校应该允许养小动物吗？",
         description: "探讨在学校养小动物作为班级宠物的利弊。",
-        image: "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该允许养",
@@ -168,8 +168,8 @@ const topicsData = [
         id: 4,
         title: "零花钱应该自己管理还是给家长保管？",
         description: "讨论小学生是否应该自主管理自己的零花钱。",
-        image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该自己管理",
@@ -219,8 +219,8 @@ const topicsData = [
         id: 5,
         title: "课间应该安静休息还是活跃运动？",
         description: "讨论课间十分钟的最佳使用方式。",
-        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1581726690015-c2861136b5c2?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该安静休息",
@@ -284,30 +284,11 @@ function initApp() {
     setupEventListeners();
 }
 
-// 初始化 Three.js
+// 初始化容器（不再使用Three.js）
 function initThreeJS() {
+    // 简化初始化，不再使用Three.js
     const container = document.getElementById('three-container');
-    
-    // 创建场景
-    scene = new THREE.Scene();
-    
-    // 创建相机
-    camera = new THREE.PerspectiveCamera(50, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-    camera.position.z = 5;
-    
-    // 创建渲染器
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(container.offsetWidth, container.offsetHeight);
-    renderer.setClearColor(0x000000, 0);
-    container.appendChild(renderer.domElement);
-    
-    // 添加光源
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(1, 1, 1);
-    scene.add(directionalLight);
+    // 容器已经准备好，直接使用CSS动画
 }
 
 // 创建话题卡片
@@ -326,9 +307,7 @@ function createTopicCards() {
             </div>
         `;
         
-        // 设置卡片位置
-        const yPosition = index * 320; // 卡片间距
-        cardElement.style.top = yPosition + 'px';
+        // 卡片初始位置已在CSS中设置
         
         // 添加点击事件
         cardElement.addEventListener('click', () => selectTopic(index));
@@ -340,22 +319,27 @@ function createTopicCards() {
     updateCardsPosition();
 }
 
-// 更新卡片位置和状态
+// 更新卡片位置和状态（扇形重叠布局）
 function updateCardsPosition() {
     cards.forEach((card, index) => {
         const offset = index - currentTopicIndex;
-        const yPosition = offset * 100; // 调整垂直间距
-        const scale = index === currentTopicIndex ? 1 : 0.9;
-        const opacity = index === currentTopicIndex ? 1 : 0.6;
         
-        card.style.transform = `translateY(${yPosition}px) scale(${scale})`;
-        card.style.opacity = opacity;
-        card.style.zIndex = index === currentTopicIndex ? 10 : 1;
+        // 扇形布局参数（适配竖版卡片）
+        const baseRotation = offset * 8; // 每张卡片8度旋转差
+        const yOffset = Math.abs(offset) * 20; // 垂直偏移
+        const xOffset = offset * 30; // 水平偏移，形成扇形
+        const scale = index === currentTopicIndex ? 1 : 0.8;
         
         if (index === currentTopicIndex) {
+            // 激活卡片：弹出效果，居中显示
+            card.style.transform = `translate(-50%, -60%) scale(1.1) rotate(0deg)`;
+            card.style.zIndex = 10;
             card.classList.add('active');
             card.classList.remove('inactive');
         } else {
+            // 非激活卡片：扇形排列，基于中心点偏移
+            card.style.transform = `translate(calc(-50% + ${xOffset}px), calc(-50% + ${yOffset}px)) scale(${scale}) rotate(${baseRotation}deg)`;
+            card.style.zIndex = 5 - Math.abs(offset);
             card.classList.remove('active');
             card.classList.add('inactive');
         }
@@ -365,12 +349,14 @@ function updateCardsPosition() {
 // 设置事件监听器
 function setupEventListeners() {
     const container = document.getElementById('three-container');
+    let startX = 0;
     let startY = 0;
     let isDragging = false;
     
     // 触摸事件
     container.addEventListener('touchstart', (e) => {
         if (isAnimating) return;
+        startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isDragging = true;
     });
@@ -382,13 +368,18 @@ function setupEventListeners() {
     container.addEventListener('touchend', (e) => {
         if (!isDragging || isAnimating) return;
         
+        const endX = e.changedTouches[0].clientX;
         const endY = e.changedTouches[0].clientY;
+        const deltaX = startX - endX;
         const deltaY = startY - endY;
         
-        if (Math.abs(deltaY) > 50) {
-            if (deltaY > 0 && currentTopicIndex < topicsData.length - 1) {
+        // 检查是否为水平滑动（水平移动距离大于垂直移动距离）
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0 && currentTopicIndex < topicsData.length - 1) {
+                // 向左滑动，下一个话题
                 navigateToTopic(currentTopicIndex + 1);
-            } else if (deltaY < 0 && currentTopicIndex > 0) {
+            } else if (deltaX < 0 && currentTopicIndex > 0) {
+                // 向右滑动，上一个话题
                 navigateToTopic(currentTopicIndex - 1);
             }
         }
@@ -407,6 +398,17 @@ function setupEventListeners() {
             navigateToTopic(currentTopicIndex - 1);
         }
     });
+    
+    // 键盘事件（用于桌面测试）
+    document.addEventListener('keydown', (e) => {
+        if (isAnimating) return;
+        
+        if (e.key === 'ArrowLeft' && currentTopicIndex > 0) {
+            navigateToTopic(currentTopicIndex - 1);
+        } else if (e.key === 'ArrowRight' && currentTopicIndex < topicsData.length - 1) {
+            navigateToTopic(currentTopicIndex + 1);
+        }
+    });
 }
 
 // 导航到指定话题
@@ -416,16 +418,13 @@ function navigateToTopic(index) {
     isAnimating = true;
     currentTopicIndex = index;
     
-    // 3D 翻转动画
-    const currentCard = cards[currentTopicIndex];
-    currentCard.style.transform = 'rotateY(180deg)';
+    // 平滑切换动画
+    updateCardsPosition();
+    updateIndicators();
     
     setTimeout(() => {
-        updateCardsPosition();
-        updateIndicators();
-        currentCard.style.transform = '';
         isAnimating = false;
-    }, 150);
+    }, 400);
 }
 
 // 更新指示器
@@ -556,90 +555,184 @@ function prepareArgumentsData() {
     document.getElementById('selected-position-badge').textContent = 
         position === 'positive' ? '正方' : '反方';
     
-    // 更新论点卡片
-    const argumentCards = document.querySelectorAll('.argument-card');
+    // 创建论点卡片
+    createArgumentCards(arguments);
+}
+
+// 论点卡片相关变量
+let currentArgumentIndex = 0;
+let argumentCards = [];
+let argumentAnimating = false;
+
+// 创建论点卡片
+function createArgumentCards(argumentsData) {
+    const cardsWrapper = document.getElementById('argument-cards-wrapper');
+    cardsWrapper.innerHTML = '';
+    argumentCards = [];
+    
+    // 为每个论点选择相关图片
+    const argumentImages = [
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=240&fit=crop', // 论点1
+        'https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=300&h=240&fit=crop', // 论点2
+        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300&h=240&fit=crop'  // 论点3
+    ];
+    
+    argumentsData.forEach((arg, index) => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'argument-card';
+        cardElement.innerHTML = `
+            <div class="argument-card-inner">
+                <div class="argument-card-front">
+                    <img class="argument-card-image" src="${argumentImages[index]}" alt="${arg.title}">
+                    <div class="argument-card-content">
+                        <h3 class="argument-card-title">${arg.title}</h3>
+                        <p class="argument-card-preview">${arg.preview}</p>
+                    </div>
+                    <div class="flip-hint">点击查看详情</div>
+                </div>
+                <div class="argument-card-back">
+                    <div class="argument-card-details">
+                        <p>${arg.details}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // 添加点击翻转事件
+        cardElement.addEventListener('click', () => toggleArgumentCard(index));
+        
+        cardsWrapper.appendChild(cardElement);
+        argumentCards.push(cardElement);
+    });
+    
+    // 设置初始状态
+    currentArgumentIndex = 0;
+    updateArgumentCardsPosition();
+    updateArgumentIndicators();
+    setupArgumentSwipeEvents();
+}
+
+// 更新论点卡片位置
+function updateArgumentCardsPosition() {
     argumentCards.forEach((card, index) => {
-        if (arguments[index]) {
-            const arg = arguments[index];
-            card.querySelector('.argument-title').textContent = arg.title;
-            card.querySelector('.argument-preview').textContent = arg.preview;
-            card.querySelector('.argument-details p').textContent = arg.details;
+        const offset = index - currentArgumentIndex;
+        
+        if (index === currentArgumentIndex) {
+            // 当前卡片：居中显示
+            card.style.transform = 'translate(-50%, -50%) scale(1.05)';
+            card.style.zIndex = 10;
+            card.classList.add('active');
+            card.classList.remove('inactive');
+        } else {
+            // 非当前卡片：左右偏移
+            const xOffset = offset * 150; // 水平偏移
+            const scale = 0.8;
+            card.style.transform = `translate(calc(-50% + ${xOffset}px), -50%) scale(${scale})`;
+            card.style.zIndex = 5 - Math.abs(offset);
+            card.classList.remove('active');
+            card.classList.add('inactive');
         }
     });
 }
 
-// 论点展开/收起
-function toggleArgument(index) {
-    const card = document.querySelector(`.argument-card[data-index="${index}"]`);
-    const details = card.querySelector('.argument-details');
-    const isExpanded = card.classList.contains('expanded');
+// 更新论点指示器
+function updateArgumentIndicators() {
+    const dotsContainer = document.getElementById('argument-dots');
+    dotsContainer.innerHTML = '';
     
-    if (isExpanded) {
-        details.style.display = 'none';
-        card.classList.remove('expanded');
-    } else {
-        details.style.display = 'block';
-        card.classList.add('expanded', 'read');
-        readArguments.add(index);
-    }
-    
-    updateStartDebateButton();
+    argumentCards.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'argument-dot';
+        if (index === currentArgumentIndex) {
+            dot.classList.add('active');
+        }
+        dotsContainer.appendChild(dot);
+    });
 }
 
-// 更新开始辩论按钮状态
-function updateStartDebateButton() {
-    const startBtn = document.getElementById('start-debate-btn');
-    startBtn.disabled = readArguments.size < 2;
-}
-
-// 语音通话功能
-function toggleCall() {
-    const callBtn = document.getElementById('call-btn');
-    const audioWaves = document.getElementById('audio-waves');
-    const timer = document.getElementById('call-timer');
+// 设置论点卡片滑动事件
+function setupArgumentSwipeEvents() {
+    const cardsWrapper = document.getElementById('argument-cards-wrapper');
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
     
-    if (!callActive) {
-        // 开始通话
-        callActive = true;
-        callStartTime = Date.now();
-        callBtn.classList.add('calling');
-        callBtn.innerHTML = '<i class="fas fa-phone-slash"></i>';
-        audioWaves.style.display = 'flex';
-        timer.style.display = 'block';
+    cardsWrapper.addEventListener('touchstart', (e) => {
+        if (argumentAnimating) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isDragging = true;
+    });
+    
+    cardsWrapper.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+    });
+    
+    cardsWrapper.addEventListener('touchend', (e) => {
+        if (!isDragging || argumentAnimating) return;
         
-        // 开始计时
-        callTimer = setInterval(updateCallTimer, 1000);
-    } else {
-        // 结束通话
-        endCall();
-    }
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const deltaX = startX - endX;
+        const deltaY = startY - endY;
+        
+        // 检查是否为水平滑动
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0 && currentArgumentIndex < argumentCards.length - 1) {
+                // 向左滑动，下一张卡片
+                navigateToArgument(currentArgumentIndex + 1);
+            } else if (deltaX < 0 && currentArgumentIndex > 0) {
+                // 向右滑动，上一张卡片
+                navigateToArgument(currentArgumentIndex - 1);
+            }
+        }
+        
+        isDragging = false;
+    });
+    
+    // 键盘支持
+    document.addEventListener('keydown', (e) => {
+        if (argumentAnimating) return;
+        
+        if (e.key === 'ArrowLeft' && currentArgumentIndex > 0) {
+            navigateToArgument(currentArgumentIndex - 1);
+        } else if (e.key === 'ArrowRight' && currentArgumentIndex < argumentCards.length - 1) {
+            navigateToArgument(currentArgumentIndex + 1);
+        }
+    });
 }
 
-function updateCallTimer() {
-    const elapsed = Math.floor((Date.now() - callStartTime) / 1000);
-    const minutes = Math.floor(elapsed / 60);
-    const seconds = elapsed % 60;
+// 导航到指定论点
+function navigateToArgument(index) {
+    if (argumentAnimating || index === currentArgumentIndex) return;
     
-    const timer = document.getElementById('call-timer');
-    timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    argumentAnimating = true;
+    currentArgumentIndex = index;
+    
+    updateArgumentCardsPosition();
+    updateArgumentIndicators();
+    
+    setTimeout(() => {
+        argumentAnimating = false;
+    }, 400);
 }
 
-function endCall() {
-    callActive = false;
-    const callBtn = document.getElementById('call-btn');
-    const audioWaves = document.getElementById('audio-waves');
-    const timer = document.getElementById('call-timer');
-    
-    callBtn.classList.remove('calling');
-    callBtn.innerHTML = '<i class="fas fa-phone"></i>';
-    audioWaves.style.display = 'none';
-    timer.style.display = 'none';
-    
-    if (callTimer) {
-        clearInterval(callTimer);
-        callTimer = null;
+// 翻转论点卡片
+function toggleArgumentCard(index) {
+    if (index !== currentArgumentIndex) {
+        // 如果不是当前卡片，先切换到该卡片
+        navigateToArgument(index);
+        return;
     }
+    
+    const card = argumentCards[index];
+    card.classList.toggle('flipped');
 }
+
+// 移除旧的论点相关函数，不再需要
+// toggleArgument 和 updateStartDebateButton 已被新的卡片系统替代
+
+// 移除语音通话功能，不再需要
 
 // 开始正式辩论
 function startDebate() {
@@ -980,21 +1073,6 @@ function resetApp() {
 
 // 窗口大小调整
 window.addEventListener('resize', () => {
-    if (renderer && camera) {
-        const container = document.getElementById('three-container');
-        camera.aspect = container.offsetWidth / container.offsetHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.offsetWidth, container.offsetHeight);
-    }
-});
-
-// 动画循环
-function animate() {
-    requestAnimationFrame(animate);
-    if (renderer && scene && camera) {
-        renderer.render(scene, camera);
-    }
-}
-
-// 启动动画循环
-animate(); 
+    // 不再需要Three.js相关的resize处理
+    updateCardsPosition();
+}); 
