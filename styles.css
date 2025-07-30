@@ -747,7 +747,18 @@ body {
     background: rgba(255, 219, 119, 0.7);
 }
 
-/* 辩论页面样式 */
+/* 辩论页面优化 - 修复超出屏幕问题 */
+#debate-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* 辩论计时区域 - 按设计规范优化 */
 .debate-timer-section {
     display: flex;
     justify-content: space-between;
@@ -755,55 +766,41 @@ body {
     padding: 8px 16px;
     background: rgba(255, 219, 119, 0.1);
     border-radius: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    min-height: 48px;
+    flex-shrink: 0;
 }
 
 .countdown-timer {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: #FFDB77;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.countdown-timer.warning {
-    color: #FF6347;
-    animation: flash 1s ease-in-out infinite;
-}
-
-@keyframes flash {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
 }
 
 .skip-round-btn {
     background: transparent;
     border: 2px solid #FFDB77;
     color: #FFDB77;
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.skip-round-btn:hover {
-    background: #FFDB77;
-    color: #2C2C2C;
-}
-
-/* 参与者信息区域 */
+/* 参与者区域 - 紧凑布局 */
 .participant-section {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px;
-    margin: 8px 0;
-    border-radius: 16px;
+    gap: 12px;
+    padding: 12px;
+    margin: 4px 0;
+    border-radius: 12px;
     transition: all 0.3s ease;
     position: relative;
+    min-height: 70px;
+    flex-shrink: 0;
 }
 
 .participant-section.opponent {
@@ -822,9 +819,8 @@ body {
 }
 
 .participant-avatar {
-    position: relative;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 }
 
 .avatar-img {
@@ -832,7 +828,7 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #FFDB77;
+    border: 2px solid #FFDB77;
 }
 
 .speaking-indicator {
@@ -880,31 +876,32 @@ body {
     font-weight: 500;
 }
 
-/* 辩论进度区域 */
+/* 辩论进度区域 - 紧凑设计 */
 .debate-progress-section {
     text-align: center;
-    margin: 24px 0;
-    padding: 20px;
+    margin: 12px 0;
+    padding: 16px;
     background: rgba(255, 219, 119, 0.05);
-    border-radius: 16px;
+    border-radius: 12px;
+    flex-shrink: 0;
 }
 
 .round-indicator {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: #FFDB77;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .progress-circles {
     display: flex;
     justify-content: center;
-    gap: 24px;
+    gap: 16px;
 }
 
 .progress-circle {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -912,7 +909,6 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 219, 119, 0.3);
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .progress-circle.current {
@@ -958,24 +954,33 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 16px;
+    max-height: 200px;
+    min-height: 150px;
 }
 
 .voice-status {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .status-text {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #FFDB77;
     margin-bottom: 8px;
 }
 
 .debate-voice-btn {
-    width: 80px;
-    height: 80px;
-    font-size: 32px;
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+    border-radius: 50%;
+    background: #FFDB77;
+    color: #2C2C2C;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .debate-voice-btn.active {
@@ -990,12 +995,20 @@ body {
 }
 
 .debate-waves {
-    height: 50px;
-    margin-bottom: 20px;
+    height: 40px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
 
 .debate-waves .wave {
-    height: 15px;
+    width: 4px;
+    height: 12px;
+    background: #FFDB77;
+    border-radius: 2px;
+    animation: waveAnimation 1.5s ease-in-out infinite;
 }
 
 .debate-waves .wave:nth-child(1) { animation-delay: 0s; }
