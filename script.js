@@ -375,12 +375,14 @@ function setupEventListeners() {
         
         // 检查是否为水平滑动（水平移动距离大于垂直移动距离）
         if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-            if (deltaX > 0 && currentTopicIndex < topicsData.length - 1) {
-                // 向左滑动，下一个话题
-                navigateToTopic(currentTopicIndex + 1);
-            } else if (deltaX < 0 && currentTopicIndex > 0) {
-                // 向右滑动，上一个话题
-                navigateToTopic(currentTopicIndex - 1);
+            if (deltaX > 0) {
+                // 向左滑动，下一个话题（循环）
+                const nextIndex = (currentTopicIndex + 1) % topicsData.length;
+                navigateToTopic(nextIndex);
+            } else if (deltaX < 0) {
+                // 向右滑动，上一个话题（循环）
+                const prevIndex = (currentTopicIndex - 1 + topicsData.length) % topicsData.length;
+                navigateToTopic(prevIndex);
             }
         }
         
@@ -392,10 +394,14 @@ function setupEventListeners() {
         if (isAnimating) return;
         
         e.preventDefault();
-        if (e.deltaY > 0 && currentTopicIndex < topicsData.length - 1) {
-            navigateToTopic(currentTopicIndex + 1);
-        } else if (e.deltaY < 0 && currentTopicIndex > 0) {
-            navigateToTopic(currentTopicIndex - 1);
+        if (e.deltaY > 0) {
+            // 向下滚动，下一个话题（循环）
+            const nextIndex = (currentTopicIndex + 1) % topicsData.length;
+            navigateToTopic(nextIndex);
+        } else if (e.deltaY < 0) {
+            // 向上滚动，上一个话题（循环）
+            const prevIndex = (currentTopicIndex - 1 + topicsData.length) % topicsData.length;
+            navigateToTopic(prevIndex);
         }
     });
     
@@ -403,10 +409,14 @@ function setupEventListeners() {
     document.addEventListener('keydown', (e) => {
         if (isAnimating) return;
         
-        if (e.key === 'ArrowLeft' && currentTopicIndex > 0) {
-            navigateToTopic(currentTopicIndex - 1);
-        } else if (e.key === 'ArrowRight' && currentTopicIndex < topicsData.length - 1) {
-            navigateToTopic(currentTopicIndex + 1);
+        if (e.key === 'ArrowLeft') {
+            // 左箭头，上一个话题（循环）
+            const prevIndex = (currentTopicIndex - 1 + topicsData.length) % topicsData.length;
+            navigateToTopic(prevIndex);
+        } else if (e.key === 'ArrowRight') {
+            // 右箭头，下一个话题（循环）
+            const nextIndex = (currentTopicIndex + 1) % topicsData.length;
+            navigateToTopic(nextIndex);
         }
     });
 }
@@ -678,12 +688,14 @@ function setupArgumentSwipeEvents() {
         
         // 检查是否为水平滑动
         if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-            if (deltaX > 0 && currentArgumentIndex < argumentCards.length - 1) {
-                // 向左滑动，下一张卡片
-                navigateToArgument(currentArgumentIndex + 1);
-            } else if (deltaX < 0 && currentArgumentIndex > 0) {
-                // 向右滑动，上一张卡片
-                navigateToArgument(currentArgumentIndex - 1);
+            if (deltaX > 0) {
+                // 向左滑动，下一张卡片（循环）
+                const nextIndex = (currentArgumentIndex + 1) % argumentCards.length;
+                navigateToArgument(nextIndex);
+            } else if (deltaX < 0) {
+                // 向右滑动，上一张卡片（循环）
+                const prevIndex = (currentArgumentIndex - 1 + argumentCards.length) % argumentCards.length;
+                navigateToArgument(prevIndex);
             }
         }
         
@@ -694,10 +706,14 @@ function setupArgumentSwipeEvents() {
     document.addEventListener('keydown', (e) => {
         if (argumentAnimating) return;
         
-        if (e.key === 'ArrowLeft' && currentArgumentIndex > 0) {
-            navigateToArgument(currentArgumentIndex - 1);
-        } else if (e.key === 'ArrowRight' && currentArgumentIndex < argumentCards.length - 1) {
-            navigateToArgument(currentArgumentIndex + 1);
+        if (e.key === 'ArrowLeft') {
+            // 左箭头，上一张卡片（循环）
+            const prevIndex = (currentArgumentIndex - 1 + argumentCards.length) % argumentCards.length;
+            navigateToArgument(prevIndex);
+        } else if (e.key === 'ArrowRight') {
+            // 右箭头，下一张卡片（循环）
+            const nextIndex = (currentArgumentIndex + 1) % argumentCards.length;
+            navigateToArgument(nextIndex);
         }
     });
 }
