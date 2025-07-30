@@ -15,8 +15,8 @@ const topicsData = [
         id: 1,
         title: "小学生应该带手机上学吗？",
         description: "探讨小学生是否需要在学校使用手机，以及手机对学习的影响。",
-        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "支持带手机",
@@ -66,8 +66,8 @@ const topicsData = [
         id: 2,
         title: "周末应该多写作业还是多玩耍？",
         description: "讨论周末时间的安排，是应该专注学习还是放松娱乐。",
-        image: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该多写作业",
@@ -117,8 +117,8 @@ const topicsData = [
         id: 3,
         title: "学校应该允许养小动物吗？",
         description: "探讨在学校养小动物作为班级宠物的利弊。",
-        image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该允许养",
@@ -168,8 +168,8 @@ const topicsData = [
         id: 4,
         title: "零花钱应该自己管理还是给家长保管？",
         description: "讨论小学生是否应该自主管理自己的零花钱。",
-        image: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1607706189992-eae578626c86?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1607706189992-eae578626c86?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该自己管理",
@@ -219,8 +219,8 @@ const topicsData = [
         id: 5,
         title: "课间应该安静休息还是活跃运动？",
         description: "讨论课间十分钟的最佳使用方式。",
-        image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=250&fit=crop",
-        coverImage: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=225&fit=crop",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop",
+        coverImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=225&fit=crop",
         positions: {
             positive: {
                 title: "应该安静休息",
@@ -582,9 +582,9 @@ function createArgumentCards(argumentsData) {
     
     // 为每个论点选择相关图片
     const argumentImages = [
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=240&fit=crop', // 论点1
-        'https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=300&h=240&fit=crop', // 论点2
-        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300&h=240&fit=crop'  // 论点3
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=240&fit=crop', // 论点1
+        'https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=300&h=240&fit=crop', // 论点2
+        'https://images.unsplash.com/photo-1493612276216-ee3925520721?w=300&h=240&fit=crop'  // 论点3
     ];
     
     argumentsData.forEach((arg, index) => {
